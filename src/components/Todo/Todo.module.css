@@ -1,0 +1,23 @@
+.todo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo button{
+    width: 35px;
+    margin: 3px;
+}
+
+.todoLabel{
+    margin-left: 1.25rem;
+    cursor: pointer;
+    user-select: none;
+}
+.done{
+    text-decoration: line-through;
+}
+.important{
+    font-weight: bold;
+    color: steelblue;
+}

@@ -1,0 +1,8 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+.count{
+    align-self: end;
+    font-size: 12px;
+}
