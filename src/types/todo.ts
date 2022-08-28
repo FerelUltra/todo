@@ -9,6 +9,7 @@ export interface ITodo{
 }
 export interface IAppState{
   todos: ITodo[],
-  status: IStatus
+  status: IStatus,
+  search: string
 }
 export type IStatus = 'all' | 'active' | 'done'

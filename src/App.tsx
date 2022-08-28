@@ -26,7 +26,8 @@ class App extends Component<any, IAppState> {
       this.createTodo("drink coffee"),
       this.createTodo("drink tea")
     ],
-    status: "active"
+    status: "active",
+    search: ""
   };
 
   toggleProperty = (arr: any[], id: number, propName: string) => {
@@ -78,9 +79,14 @@ class App extends Component<any, IAppState> {
       };
     });
   };
+  onSearchChange = (e: any) => {
+    this.setState({
+      search: e.target.value
+    });
+  };
 
   render() {
-    const { todos, status } = this.state;
+    const { todos, status, search } = this.state;
     const done = todos.filter((el) => el.done).length;
     const todo = todos.length - done;
     return (
@@ -88,21 +94,21 @@ class App extends Component<any, IAppState> {
         <div className="app">
           <Header todo={todo} done={done} />
           <div>
-            <SearchPanel />
+            <SearchPanel search={search} onSearchChange={this.onSearchChange} />
             <StatusFilter statusClick={this.statusClick} status={status} />
           </div>
           <ul className="list-group todoLIst">
-            {this.state.todos.filter(el=> {
-              if (this.state.status === 'all' ){
-                return true
+            {this.state.todos.filter(el => {
+              if (this.state.status === "all") {
+                return true;
               }
-              if (this.state.status === 'active'){
-                return !el.done
+              if (this.state.status === "active") {
+                return !el.done;
               }
-              if (this.state.status === 'done'){
-                return el.done
+              if (this.state.status === "done") {
+                return el.done;
               }
-            }).map(todo => {
+            }).filter(el=> el.text.includes(this.state.search)).map(todo => {
               const { id, text, important, done } = todo;
               return (
                 <li key={id}>
