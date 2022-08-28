@@ -14,10 +14,12 @@ export class AddItem extends Component<any, any> {
     }
     onSubmit = (e: any) =>{
         e.preventDefault()
-        this.props.onItemAdded(this.state.label)
-        this.setState({
-            label: ''
-        })
+        if(this.state.label){
+            this.props.onItemAdded(this.state.label)
+            this.setState({
+                label: ''
+            })
+        }
     }
     render() {
         return (

@@ -1,5 +1,7 @@
-import './App.css';
-import {Component} from 'react';
+import './App.css'
+
+import { Component } from 'react';
+
 import {IAppState} from './types/todo';
 import {List} from './components/List/List';
 import {Header} from './components/Header/Header';
@@ -30,7 +32,7 @@ class App extends Component<any, IAppState> {
         const idx = arr.findIndex((el) => el.id === id)
         const oldItem = arr[idx]
         const newItem = {...oldItem, [propName]: !oldItem[propName]}
-        let newArr = [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)]
+        const newArr = [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)]
         console.log(newArr)
 
         return newArr
@@ -38,7 +40,7 @@ class App extends Component<any, IAppState> {
     deleteItem = (id: number) => {
         this.setState(({todos}) => {
             const idx = todos.findIndex((el) => el.id === id)
-            let newArr = [...todos.slice(0, idx), ...todos.slice(idx + 1)]
+            const newArr = [...todos.slice(0, idx), ...todos.slice(idx + 1)]
             console.log(newArr)
             return {
                 todos: newArr
@@ -84,7 +86,7 @@ class App extends Component<any, IAppState> {
                         {this.state.todos.map(todo=>{
                             const {id, text, important, done} = todo;
                             return(
-                                <li>
+                                <li key={id}>
                                     <Todo text={text} important={important} done={done} deleteItem={() => this.deleteItem(id)}
                                               toggleImportant={() => this.toggleImportant(id)}
                                               toggleDone={() => this.toggleDone(id)}/>
