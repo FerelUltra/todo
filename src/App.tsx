@@ -97,7 +97,7 @@ class App extends Component<any, IAppState> {
             <SearchPanel search={search} onSearchChange={this.onSearchChange} />
             <StatusFilter statusClick={this.statusClick} status={status} />
           </div>
-          <ul className="list-group todoLIst">
+          <ul className="list-group todoList">
             {this.state.todos.filter(el => {
               if (this.state.status === "all") {
                 return true;
