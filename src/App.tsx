@@ -26,7 +26,7 @@ class App extends Component<any, IAppState> {
       this.createTodo("drink coffee"),
       this.createTodo("drink tea")
     ],
-    status: "active",
+    status: "all",
     search: ""
   };
 
