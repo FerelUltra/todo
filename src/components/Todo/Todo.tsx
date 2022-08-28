@@ -19,7 +19,7 @@ export class Todo extends PureComponent<any, any> {
           timer: prevState.timer + 1,
         };
       });
-    }, 2000);
+    }, 1000);
 
     this.setState((prevState: any) => {
       return {
