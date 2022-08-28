@@ -8,5 +8,7 @@ export interface ITodo{
   onDeleted?: MouseEventHandler<HTMLButtonElement>
 }
 export interface IAppState{
-  todos: ITodo[]
+  todos: ITodo[],
+  status: IStatus
 }
+export type IStatus = 'all' | 'active' | 'done'
