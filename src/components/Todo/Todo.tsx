@@ -1,4 +1,4 @@
-import { Component, PureComponent } from "react";
+import { Component, PureComponent, useEffect, useState } from "react";
 import { ITodo } from "../../types/todo";
 import styles from "./Todo.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,32 +6,54 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons/faExclamation";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import * as timeago from "timeago.js";
-
-export class Todo extends PureComponent<any, any> {
-  state = {
-    timer: 0,
-  };
-  componentDidMount(){
+export const Todo = (props: any) => {
+  const [timer, setTimer] = useState(0)
+  const [intervalId, setIntervalId] = useState()
+  // state = {
+  //   timer: 0
+  // };
+  // componentDidMount();
+  useEffect(()=>{
     const newIntervalId = setInterval(() => {
-      this.setState((prevState: { timer: number; }) => {
-        return {
-          ...prevState,
-          timer: prevState.timer + 1,
-        };
-      });
-    }, 1000);
+      setTimer(prevState => {
+        return prevState + 1
+      })
+    }, 1000)
+      // this.setState((prevState: { timer: number; }) => {
+      //   return {
+      //     ...prevState,
+      //     timer: prevState.timer + 1
+      //   };
+      // });
+    }, []);
 
-    this.setState((prevState: any) => {
-      return {
-        ...prevState,
-        intervalId: newIntervalId,
-      };
-    });
-  }
+    // this.setState((prevState: any) => {
+    //   return {
+    //     ...prevState,
+    //     intervalId: newIntervalId
+    //   };
+    // });
+  // {
+  //   const newIntervalId = setInterval(() => {
+  //     this.setState((prevState: { timer: number; }) => {
+  //       return {
+  //         ...prevState,
+  //         timer: prevState.timer + 1
+  //       };
+  //     });
+  //   }, 1000);
+  //
+  //   this.setState((prevState: any) => {
+  //     return {
+  //       ...prevState,
+  //       intervalId: newIntervalId
+  //     };
+  //   });
+  // }
 
-  render() {
-    const { text, deleteItem, toggleImportant, toggleDone, important, done } = this.props;
-    const date = Date.now()
+  {
+    const { text, deleteItem, toggleImportant, toggleDone, important, done } = props;
+    const date = Date.now();
     let labelClassname = "";
     if (done) {
       labelClassname += " " + styles.done;
@@ -45,7 +67,7 @@ export class Todo extends PureComponent<any, any> {
            onClick={toggleDone}
         >{text}</p>
         <div className="buttons">
-          {timeago.format(date - this.state.timer*1000)}
+          {timeago.format(date - timer * 1000)}
           <button type="button"
                   className="btn btn-outline-success btn-sm"
                   onClick={toggleImportant}
@@ -62,4 +84,4 @@ export class Todo extends PureComponent<any, any> {
       </div>
     );
   }
-}
+};

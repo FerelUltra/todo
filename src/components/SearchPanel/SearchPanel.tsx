@@ -1,15 +1,14 @@
 import { Component } from "react";
 import { ITodo } from "../../types/todo";
 
-export class SearchPanel extends Component<any> {
+export const SearchPanel = (props: any) => {
 
-  render() {
     return (
       <input type="text"
-             value={this.props.search}
+             value={props.search}
              onChange={(e) => {
-        this.props.onSearchChange(e);
+        props.onSearchChange(e);
       }} />
     );
-  }
+
 }
