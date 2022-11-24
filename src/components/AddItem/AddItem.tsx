@@ -3,19 +3,17 @@ import styles from "./AddItem.module.css";
 
 export const AddItem = (props: any) => {
   const [label, setLabel] = useState("");
-  // state = {
-  //     label: ''
-  // }
+  const [seconds, setSeconds] = useState("");
   const onLabelChange = (e: any) => {
     setLabel(e.target.value);
-    // this.setState({
-    //     label: e.target.value
-    // })
+  };
+  const onSecondsChange = (e: any) => {
+    setSeconds(e.target.value);
   };
   const onSubmit = (e: any) => {
     e.preventDefault();
-    if (label) {
-      props.onItemAdded(label);
+    if (label && seconds) {
+      props.onItemAdded(label, Number(seconds));
       setLabel("");
       // this.setState({
       //     label: ''
@@ -32,6 +30,11 @@ export const AddItem = (props: any) => {
              onChange={onLabelChange}
              value={label}
              placeholder="what need to be done?" />
+      <input type="number"
+             className="form-control"
+             onChange={onSecondsChange}
+             value={seconds}
+             placeholder="seconds"/>
       <button className="btn btn-outline-secondary"
 
       >Add item

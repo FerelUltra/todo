@@ -13,15 +13,16 @@ import { Todo } from "./components/Todo/Todo";
 
 const App = () => {
   let maxId = 0;
-  const createTodo = (text: string) => {
+  const createTodo = (text: string, seconds: number) => {
     return {
       text,
       important: false,
       done: false,
-      id: maxId++
+      id: maxId++,
+      seconds
     };
   };
-  const [todos, setTodos] = useState([createTodo("drink coffee"), createTodo("drink tea")]);
+  const [todos, setTodos] = useState([createTodo("drink coffee", 59), createTodo("drink tea", 59)]);
   const [status, setStatus] = useState("all");
   const [search, setSearch] = useState("")
   // state: IAppState = {
@@ -56,8 +57,8 @@ const App = () => {
     //   };
     // });
   };
-  const addItem = (text: string) => {
-    const newItem = createTodo(text);
+  const addItem = (text: string, seconds: number) => {
+    const newItem = createTodo(text, seconds);
     setTodos(prevState => {
       return [...prevState, newItem]
     })
@@ -127,12 +128,14 @@ const App = () => {
                 return el.done;
               }
             }).filter(el => el.text.includes(search)).map(todo => {
-              const { id, text, important, done } = todo;
+              const { id, text, important, done, seconds } = todo;
               return (
                 <li key={id}>
                   <Todo text={text} important={important} done={done} deleteItem={() => deleteItem(id)}
                         toggleImportant={() => toggleImportant(id)}
-                        toggleDone={() => toggleDone(id)} />
+                        toggleDone={() => toggleDone(id)}
+                        seconds={seconds}
+                  />
                 </li>
               );
             })}
